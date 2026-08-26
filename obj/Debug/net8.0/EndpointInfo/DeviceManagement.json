@@ -1,0 +1,6386 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Device Management API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Audit/history/{tableName}": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Audit/history/{tableName}/{recordId}": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Audit/mark-as-final/{auditLogId}": {
+      "post": {
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "name": "auditLogId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceAssociation/available/{parentId}": {
+      "get": {
+        "tags": [
+          "DeviceAssociation"
+        ],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceAssociation/{parentId}/associate": {
+      "post": {
+        "tags": [
+          "DeviceAssociation"
+        ],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssociateDeviceDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssociateDeviceDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssociateDeviceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceAssociation/{childId}/unassociate": {
+      "patch": {
+        "tags": [
+          "DeviceAssociation"
+        ],
+        "parameters": [
+          {
+            "name": "childId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceAssociation/{parentId}/subdevices": {
+      "get": {
+        "tags": [
+          "DeviceAssociation"
+        ],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceAssociation/{deviceDetailId}/tree": {
+      "get": {
+        "tags": [
+          "DeviceAssociation"
+        ],
+        "parameters": [
+          {
+            "name": "deviceDetailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceCategory/create-deviceCategory": {
+      "post": {
+        "tags": [
+          "DeviceCategory"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCategoryCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCategoryCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCategoryCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceCategory/get-all-category": {
+      "get": {
+        "tags": [
+          "DeviceCategory"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceCategory/get-category/{id}": {
+      "get": {
+        "tags": [
+          "DeviceCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceCategory/update-category{id}": {
+      "post": {
+        "tags": [
+          "DeviceCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCategoryUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCategoryUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCategoryUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceCategory/import-deviceCategory": {
+      "post": {
+        "tags": [
+          "DeviceCategory"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceConnectionConfig/add-device-connection-config": {
+      "post": {
+        "tags": [
+          "DeviceConnectionConfig"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConnectionConfigCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConnectionConfigCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConnectionConfigCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceConnectionConfig/get-all-device-connection-configs": {
+      "get": {
+        "tags": [
+          "DeviceConnectionConfig"
+        ],
+        "parameters": [
+          {
+            "name": "DeviceDetailId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Protocol",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceConnectionConfig/{id}/get-device-connection-config": {
+      "get": {
+        "tags": [
+          "DeviceConnectionConfig"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceConnectionConfig/{id}/update-device-connection-config": {
+      "post": {
+        "tags": [
+          "DeviceConnectionConfig"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConnectionConfigUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConnectionConfigUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConnectionConfigUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceConnectionConfig/{id}/set-active": {
+      "patch": {
+        "tags": [
+          "DeviceConnectionConfig"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/create-devicedetail": {
+      "post": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDetailCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDetailCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDetailCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/get-all-devicedetail": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "DeviceMasterId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "DeviceCategoryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "DeviceTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/by-master/{deviceMasterId}": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "deviceMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/by-category/{categoryId}": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/by-type/{deviceTypeId}": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "deviceTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/by-company/{companyId}": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/get-devicedetail{id}": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/update-devicedetail{id}": {
+      "post": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDetailUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDetailUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDetailUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/import-devicedetail": {
+      "post": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/generate-qr/{deviceDetailId}": {
+      "get": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "deviceDetailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceDetail/setup-tracking/{deviceDetailId}": {
+      "post": {
+        "tags": [
+          "DeviceDetail"
+        ],
+        "parameters": [
+          {
+            "name": "deviceDetailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTrackingInputDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTrackingInputDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTrackingInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceFile/import-bulk": {
+      "post": {
+        "tags": [
+          "DeviceFile"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceLocation/add-device-location": {
+      "post": {
+        "tags": [
+          "DeviceLocation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "DeviceDetailId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "LocationType": {
+                    "type": "string"
+                  },
+                  "AddressLine1": {
+                    "type": "string"
+                  },
+                  "AddressLine2": {
+                    "type": "string"
+                  },
+                  "CountryId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "StateId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "CityId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "PinCode": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Landmark": {
+                    "type": "string"
+                  },
+                  "Latitude": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Longitude": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "TimeZoneId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "LocationContactNumber": {
+                    "type": "string"
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ImageUploadDto"
+                    }
+                  },
+                  "Documents": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DocumentUploadDto"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "DeviceDetailId": {
+                  "style": "form"
+                },
+                "LocationType": {
+                  "style": "form"
+                },
+                "AddressLine1": {
+                  "style": "form"
+                },
+                "AddressLine2": {
+                  "style": "form"
+                },
+                "CountryId": {
+                  "style": "form"
+                },
+                "StateId": {
+                  "style": "form"
+                },
+                "CityId": {
+                  "style": "form"
+                },
+                "PinCode": {
+                  "style": "form"
+                },
+                "Landmark": {
+                  "style": "form"
+                },
+                "Latitude": {
+                  "style": "form"
+                },
+                "Longitude": {
+                  "style": "form"
+                },
+                "TimeZoneId": {
+                  "style": "form"
+                },
+                "LocationContactNumber": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                },
+                "Documents": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceLocation/get-all-device-locations": {
+      "get": {
+        "tags": [
+          "DeviceLocation"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceLocation/{id}/get-device-location": {
+      "get": {
+        "tags": [
+          "DeviceLocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceLocation/{deviceDetailId}/get-by-device": {
+      "get": {
+        "tags": [
+          "DeviceLocation"
+        ],
+        "parameters": [
+          {
+            "name": "deviceDetailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceLocation/{id}/update-device-location": {
+      "post": {
+        "tags": [
+          "DeviceLocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "DeviceDetailId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "LocationType": {
+                    "type": "string"
+                  },
+                  "AddressLine1": {
+                    "type": "string"
+                  },
+                  "AddressLine2": {
+                    "type": "string"
+                  },
+                  "CountryId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "StateId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "CityId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "PinCode": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Landmark": {
+                    "type": "string"
+                  },
+                  "Latitude": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Longitude": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "TimeZoneId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "LocationContactNumber": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "boolean"
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ImageUploadDto"
+                    }
+                  },
+                  "Documents": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DocumentUploadDto"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "DeviceDetailId": {
+                  "style": "form"
+                },
+                "LocationType": {
+                  "style": "form"
+                },
+                "AddressLine1": {
+                  "style": "form"
+                },
+                "AddressLine2": {
+                  "style": "form"
+                },
+                "CountryId": {
+                  "style": "form"
+                },
+                "StateId": {
+                  "style": "form"
+                },
+                "CityId": {
+                  "style": "form"
+                },
+                "PinCode": {
+                  "style": "form"
+                },
+                "Landmark": {
+                  "style": "form"
+                },
+                "Latitude": {
+                  "style": "form"
+                },
+                "Longitude": {
+                  "style": "form"
+                },
+                "TimeZoneId": {
+                  "style": "form"
+                },
+                "LocationContactNumber": {
+                  "style": "form"
+                },
+                "IsActive": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                },
+                "Documents": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceMaster/create-device": {
+      "post": {
+        "tags": [
+          "DeviceMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceMasterCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceMasterCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceMasterCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceMaster/get-all-device": {
+      "get": {
+        "tags": [
+          "DeviceMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DeviceCategoryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "DeviceTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceMaster/get-device/{id}": {
+      "get": {
+        "tags": [
+          "DeviceMaster"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceMaster/company/{companyId}": {
+      "get": {
+        "tags": [
+          "DeviceMaster"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceMaster/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "DeviceMaster"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceMaster/update-device/{id}": {
+      "post": {
+        "tags": [
+          "DeviceMaster"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceMasterUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceMasterUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceMasterUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceModel/assign/{deviceTypeId}": {
+      "post": {
+        "tags": [
+          "DeviceModel"
+        ],
+        "parameters": [
+          {
+            "name": "deviceTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceModel/device-model-details": {
+      "get": {
+        "tags": [
+          "DeviceModel"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceModel/models-by-devicetype/{deviceTypeId}": {
+      "get": {
+        "tags": [
+          "DeviceModel"
+        ],
+        "parameters": [
+          {
+            "name": "deviceTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceModel/by-company/{companyId}": {
+      "get": {
+        "tags": [
+          "DeviceModel"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceModel/by-category/{categoryId}": {
+      "get": {
+        "tags": [
+          "DeviceModel"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceModel/my-devices": {
+      "get": {
+        "tags": [
+          "DeviceModel"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceRackLocation/add-device-rack-location": {
+      "post": {
+        "tags": [
+          "DeviceRackLocation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRackLocationCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRackLocationCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRackLocationCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceRackLocation/get-all-device-rack-locations": {
+      "get": {
+        "tags": [
+          "DeviceRackLocation"
+        ],
+        "parameters": [
+          {
+            "name": "DeviceDetailId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "RackId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "State",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "City",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceRackLocation/{id}/get-device-rack-location": {
+      "get": {
+        "tags": [
+          "DeviceRackLocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceRackLocation/{id}/update-device-rack-location": {
+      "post": {
+        "tags": [
+          "DeviceRackLocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRackLocationUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRackLocationUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRackLocationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceRackLocation/{id}/set-active": {
+      "patch": {
+        "tags": [
+          "DeviceRackLocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceType/create-devicetype": {
+      "post": {
+        "tags": [
+          "DeviceType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTypeCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTypeCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTypeCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceType/get-all-devicetype": {
+      "get": {
+        "tags": [
+          "DeviceType"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceType/get-category/{categoryId}": {
+      "get": {
+        "tags": [
+          "DeviceType"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceType/{id}": {
+      "get": {
+        "tags": [
+          "DeviceType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceType/update-type/{id}": {
+      "post": {
+        "tags": [
+          "DeviceType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTypeUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTypeUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceTypeUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeviceType/import-devicetype": {
+      "post": {
+        "tags": [
+          "DeviceType"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DocumentMaster/document-types": {
+      "get": {
+        "tags": [
+          "DocumentMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DocumentMaster/create-documenttypes": {
+      "post": {
+        "tags": [
+          "DocumentMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DocumentMaster/document-types/{id}": {
+      "delete": {
+        "tags": [
+          "DocumentMaster"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DocumentMaster/issued-by": {
+      "get": {
+        "tags": [
+          "DocumentMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DocumentMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentIssuedByDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentIssuedByDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentIssuedByDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntityType/get-all-entity": {
+      "get": {
+        "tags": [
+          "EntityType"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntityType/get-entity{id}": {
+      "get": {
+        "tags": [
+          "EntityType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntityType/create-entity": {
+      "post": {
+        "tags": [
+          "EntityType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EntityType/update-entity/{id}": {
+      "post": {
+        "tags": [
+          "EntityType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityTypeUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStore/upload-file": {
+      "post": {
+        "tags": [
+          "FileStore"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "EntityTypeId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "EntityId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "FileCategory": {
+                    "type": "string"
+                  },
+                  "FileUse": {
+                    "type": "string"
+                  },
+                  "FileExpiryDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DocumentName": {
+                    "type": "string"
+                  },
+                  "DocumentNumber": {
+                    "type": "string"
+                  },
+                  "DocumentTypeId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "IssuedById": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "IssuedByDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DocumentValidTill": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                },
+                "EntityTypeId": {
+                  "style": "form"
+                },
+                "EntityId": {
+                  "style": "form"
+                },
+                "FileCategory": {
+                  "style": "form"
+                },
+                "FileUse": {
+                  "style": "form"
+                },
+                "FileExpiryDate": {
+                  "style": "form"
+                },
+                "DocumentName": {
+                  "style": "form"
+                },
+                "DocumentNumber": {
+                  "style": "form"
+                },
+                "DocumentTypeId": {
+                  "style": "form"
+                },
+                "IssuedById": {
+                  "style": "form"
+                },
+                "IssuedByDate": {
+                  "style": "form"
+                },
+                "DocumentValidTill": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStore/entity/{entityTypeId}/{entityId}": {
+      "get": {
+        "tags": [
+          "FileStore"
+        ],
+        "parameters": [
+          {
+            "name": "entityTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "fileCategory",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStore/{id}": {
+      "get": {
+        "tags": [
+          "FileStore"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStore/update-file{id}": {
+      "post": {
+        "tags": [
+          "FileStore"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "FileUse": {
+                    "type": "string"
+                  },
+                  "FileExpiryDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DocumentName": {
+                    "type": "string"
+                  },
+                  "DocumentNumber": {
+                    "type": "string"
+                  },
+                  "DocumentTypeId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "IssuedById": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "IssuedByDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DocumentValidTill": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                },
+                "FileUse": {
+                  "style": "form"
+                },
+                "FileExpiryDate": {
+                  "style": "form"
+                },
+                "DocumentName": {
+                  "style": "form"
+                },
+                "DocumentNumber": {
+                  "style": "form"
+                },
+                "DocumentTypeId": {
+                  "style": "form"
+                },
+                "IssuedById": {
+                  "style": "form"
+                },
+                "IssuedByDate": {
+                  "style": "form"
+                },
+                "DocumentValidTill": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floor/add-floor": {
+      "post": {
+        "tags": [
+          "Floor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floor/get-all-floors": {
+      "get": {
+        "tags": [
+          "Floor"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floor/{id}/get-floor": {
+      "get": {
+        "tags": [
+          "Floor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floor/{id}/update-floor": {
+      "post": {
+        "tags": [
+          "Floor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Floor/{id}/set-active": {
+      "patch": {
+        "tags": [
+          "Floor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelCategory/create-model": {
+      "post": {
+        "tags": [
+          "ModelCategory"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCategoryCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCategoryCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCategoryCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelCategory/get-all-model": {
+      "get": {
+        "tags": [
+          "ModelCategory"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelCategory/get-model/{id}": {
+      "get": {
+        "tags": [
+          "ModelCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelCategory/update-model/{id}": {
+      "post": {
+        "tags": [
+          "ModelCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCategoryUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCategoryUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCategoryUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelCategory/import-modelcategories": {
+      "post": {
+        "tags": [
+          "ModelCategory"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelParameter/create-modelparameter": {
+      "post": {
+        "tags": [
+          "ModelParameter"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelParameterCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelParameterCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelParameterCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelParameter/model/{modelId}": {
+      "get": {
+        "tags": [
+          "ModelParameter"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelParameter/get-parameter{id}": {
+      "get": {
+        "tags": [
+          "ModelParameter"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelParameter/update-parameter{id}": {
+      "put": {
+        "tags": [
+          "ModelParameter"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelParameterUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelParameterUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelParameterUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelParameter/import-parameters": {
+      "post": {
+        "tags": [
+          "ModelParameter"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/create-modelspecification": {
+      "post": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelSpecificationCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelSpecificationCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelSpecificationCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/get-all-modelspecification": {
+      "get": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "parameters": [
+          {
+            "name": "DeviceTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/modelspecification-by-device-type/{deviceTypeId}": {
+      "get": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "parameters": [
+          {
+            "name": "deviceTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/modelspecification-by-company/{companyId}": {
+      "get": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/get-modelspecification/{id}": {
+      "get": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/update-modelspecification/{id}": {
+      "post": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelSpecificationUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelSpecificationUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelSpecificationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ModelSpecification/import-specifications": {
+      "post": {
+        "tags": [
+          "ModelSpecification"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/NetworkConnection/add-network-connection": {
+      "post": {
+        "tags": [
+          "NetworkConnection"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkConnectionCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkConnectionCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkConnectionCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/NetworkConnection/get-all-network-connections": {
+      "get": {
+        "tags": [
+          "NetworkConnection"
+        ],
+        "parameters": [
+          {
+            "name": "SourceDeviceDetailId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "TargetDeviceDetailId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "DeviceDetailId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CableType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/NetworkConnection/{id}/get-network-connection": {
+      "get": {
+        "tags": [
+          "NetworkConnection"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/NetworkConnection/{id}/update-network-connection": {
+      "post": {
+        "tags": [
+          "NetworkConnection"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkConnectionUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkConnectionUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkConnectionUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rack/add-rack": {
+      "post": {
+        "tags": [
+          "Rack"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rack/get-all-racks": {
+      "get": {
+        "tags": [
+          "Rack"
+        ],
+        "parameters": [
+          {
+            "name": "RoomId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "FloorId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rack/{id}/get-rack": {
+      "get": {
+        "tags": [
+          "Rack"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rack/{id}/update-rack": {
+      "post": {
+        "tags": [
+          "Rack"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rack/{id}/set-active": {
+      "patch": {
+        "tags": [
+          "Rack"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RackPowerCapacity/add-rack-power-capacity": {
+      "post": {
+        "tags": [
+          "RackPowerCapacity"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackPowerCapacityCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackPowerCapacityCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackPowerCapacityCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RackPowerCapacity/get-all-rack-power-capacities": {
+      "get": {
+        "tags": [
+          "RackPowerCapacity"
+        ],
+        "parameters": [
+          {
+            "name": "RackId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RackPowerCapacity/{id}/get-rack-power-capacity": {
+      "get": {
+        "tags": [
+          "RackPowerCapacity"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RackPowerCapacity/{id}/update-rack-power-capacity": {
+      "post": {
+        "tags": [
+          "RackPowerCapacity"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackPowerCapacityUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackPowerCapacityUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RackPowerCapacityUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RackPowerCapacity/{id}/set-active": {
+      "patch": {
+        "tags": [
+          "RackPowerCapacity"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Report/send": {
+      "post": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReportRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReportRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReportRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendReportResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Report/generate-pdf": {
+      "post": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratePdfRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratePdfRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneratePdfRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/add-room": {
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/get-all-rooms": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "FloorId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/{id}/get-room": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/{id}/update-room": {
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/{id}/update-geometry": {
+      "patch": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomGeometryUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomGeometryUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomGeometryUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/{id}/set-active": {
+      "patch": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UnitMaster/create-unit": {
+      "post": {
+        "tags": [
+          "UnitMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitMasterCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitMasterCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitMasterCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UnitMaster/get-all-units": {
+      "get": {
+        "tags": [
+          "UnitMaster"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsPaginated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UnitMaster/get-unit{id}": {
+      "get": {
+        "tags": [
+          "UnitMaster"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UnitMaster/update-unit/{id}": {
+      "post": {
+        "tags": [
+          "UnitMaster"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitMasterUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitMasterUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitMasterUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssociateDeviceDto": {
+        "type": "object",
+        "properties": {
+          "childDeviceDetailIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalculatorInputDto": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalculatorResultDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceCategoryCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceCategoryUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceConnectionConfigCreateDto": {
+        "required": [
+          "deviceDetailId",
+          "protocol"
+        ],
+        "type": "object",
+        "properties": {
+          "deviceDetailId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "protocol": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "ipAddress": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "port": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "objectId": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "unitId": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "pollingIntervalSeconds": {
+            "maximum": 86400,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "thingsBoardDeviceId": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceConnectionConfigUpdateDto": {
+        "type": "object",
+        "properties": {
+          "deviceDetailId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "protocol": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "ipAddress": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "port": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "objectId": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "unitId": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "pollingIntervalSeconds": {
+            "maximum": 86400,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "thingsBoardDeviceId": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceDetailCreateDto": {
+        "type": "object",
+        "properties": {
+          "deviceMasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentDeviceDetailId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "imei": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "tagNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "longName": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "warrantyExpiry": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "purchaseCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "simNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceDetailUpdateDto": {
+        "type": "object",
+        "properties": {
+          "deviceMasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "imei": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "tagNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "longName": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "warrantyExpiry": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "purchaseCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "simNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfidTagNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceMasterCreateDto": {
+        "type": "object",
+        "properties": {
+          "deviceTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "deviceCategoryId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "modelSpecificationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "deviceShortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceLongName": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataFormat": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceMasterUpdateDto": {
+        "type": "object",
+        "properties": {
+          "deviceTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "deviceCategoryId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "modelSpecificationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "deviceShortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceLongName": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataFormat": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceRackLocationCreateDto": {
+        "required": [
+          "deviceDetailId"
+        ],
+        "type": "object",
+        "properties": {
+          "deviceDetailId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rackId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "startUPosition": {
+            "maximum": 60,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "uOccupied": {
+            "maximum": 60,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "address": {
+            "maxLength": 300,
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "pinCode": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "maximum": 90,
+            "minimum": -90,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "maximum": 180,
+            "minimum": -180,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceRackLocationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "deviceDetailId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "rackId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "startUPosition": {
+            "maximum": 60,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "uOccupied": {
+            "maximum": 60,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "address": {
+            "maxLength": 300,
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "pinCode": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "maximum": 90,
+            "minimum": -90,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "maximum": 180,
+            "minimum": -180,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceTrackingInputDto": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfidTagNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceTypeCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "supportedFeature": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "iconColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceTypeUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "supportedFeature": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "iconColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentIssuedByDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "issuedByName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentTypeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentUploadDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "documentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "issuedById": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "issuedByDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "documentValidTill": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntityTypeCreateDto": {
+        "type": "object",
+        "properties": {
+          "entityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntityTypeUpdateDto": {
+        "type": "object",
+        "properties": {
+          "entityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FloorCreateDto": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "siteName": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "floorPlanFileUrl": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FloorUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "siteName": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "floorPlanFileUrl": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneratePdfRequestDto": {
+        "required": [
+          "calculatorId",
+          "calculatorName",
+          "formula",
+          "inputs",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "calculatorId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "calculatorName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "formula": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "inputs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculatorInputDto"
+            }
+          },
+          "result": {
+            "$ref": "#/components/schemas/CalculatorResultDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImageUploadDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "fileUse": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileExpiryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelCategoryCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelCategoryUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelParameterCreateDto": {
+        "type": "object",
+        "properties": {
+          "deviceModelId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "modelCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parameterName": {
+            "type": "string",
+            "nullable": true
+          },
+          "parameterValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "string",
+            "nullable": true
+          },
+          "processor": {
+            "type": "string",
+            "nullable": true
+          },
+          "ram": {
+            "type": "string",
+            "nullable": true
+          },
+          "storage": {
+            "type": "string",
+            "nullable": true
+          },
+          "intro": {
+            "type": "string",
+            "nullable": true
+          },
+          "uses": {
+            "type": "string",
+            "nullable": true
+          },
+          "feature": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmwareVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyDuration": {
+            "type": "string",
+            "nullable": true
+          },
+          "endOfLife": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelParameterEmbedDto": {
+        "type": "object",
+        "properties": {
+          "modelCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parameterName": {
+            "type": "string",
+            "nullable": true
+          },
+          "parameterValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "string",
+            "nullable": true
+          },
+          "processor": {
+            "type": "string",
+            "nullable": true
+          },
+          "ram": {
+            "type": "string",
+            "nullable": true
+          },
+          "storage": {
+            "type": "string",
+            "nullable": true
+          },
+          "intro": {
+            "type": "string",
+            "nullable": true
+          },
+          "uses": {
+            "type": "string",
+            "nullable": true
+          },
+          "feature": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmwareVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyDuration": {
+            "type": "string",
+            "nullable": true
+          },
+          "endOfLife": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelParameterUpdateDto": {
+        "type": "object",
+        "properties": {
+          "modelCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parameterName": {
+            "type": "string",
+            "nullable": true
+          },
+          "parameterValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "string",
+            "nullable": true
+          },
+          "processor": {
+            "type": "string",
+            "nullable": true
+          },
+          "ram": {
+            "type": "string",
+            "nullable": true
+          },
+          "storage": {
+            "type": "string",
+            "nullable": true
+          },
+          "intro": {
+            "type": "string",
+            "nullable": true
+          },
+          "uses": {
+            "type": "string",
+            "nullable": true
+          },
+          "feature": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmwareVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyDuration": {
+            "type": "string",
+            "nullable": true
+          },
+          "endOfLife": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelSpecificationCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "modelNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelParameterEmbedDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelSpecificationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "modelNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NetworkConnectionCreateDto": {
+        "required": [
+          "sourceDeviceDetailId",
+          "targetDeviceDetailId"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDeviceDetailId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sourcePortName": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "targetDeviceDetailId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "targetPortName": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "cableType": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "cableColorCode": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true
+          },
+          "cableLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NetworkConnectionUpdateDto": {
+        "type": "object",
+        "properties": {
+          "sourceDeviceDetailId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourcePortName": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "targetDeviceDetailId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "targetPortName": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "cableType": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "cableColorCode": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true
+          },
+          "cableLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RackCreateDto": {
+        "required": [
+          "rackName",
+          "roomId"
+        ],
+        "type": "object",
+        "properties": {
+          "roomId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rackName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "totalUHeight": {
+            "maximum": 60,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "maxWeightCapacityKg": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionX": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionY": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RackPowerCapacityCreateDto": {
+        "required": [
+          "rackId"
+        ],
+        "type": "object",
+        "properties": {
+          "rackId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "pduName": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "phaseName": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "ratedCapacityKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedLoadKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "measuredLoadKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "failoverReservedKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RackPowerCapacityUpdateDto": {
+        "type": "object",
+        "properties": {
+          "rackId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "pduName": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "phaseName": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "ratedCapacityKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estimatedLoadKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "measuredLoadKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "failoverReservedKW": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RackUpdateDto": {
+        "type": "object",
+        "properties": {
+          "roomId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "rackName": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "totalUHeight": {
+            "maximum": 60,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "maxWeightCapacityKg": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionX": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionY": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomCreateDto": {
+        "required": [
+          "floorId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "floorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "roomAreaSqFt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reservedAreaSqFt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "internalUseAreaSqFt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionX": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionY": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "width": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "length": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rotationAngle": {
+            "maximum": 360,
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomGeometryUpdateDto": {
+        "type": "object",
+        "properties": {
+          "positionX": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionY": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "width": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "length": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rotationAngle": {
+            "maximum": 360,
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomUpdateDto": {
+        "type": "object",
+        "properties": {
+          "floorId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "roomAreaSqFt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reservedAreaSqFt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "internalUseAreaSqFt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionX": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "positionY": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "width": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "length": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rotationAngle": {
+            "maximum": 360,
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendReportRequestDto": {
+        "required": [
+          "calculatorId",
+          "calculatorName",
+          "email",
+          "formula",
+          "inputs",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "calculatorId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "calculatorName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "formula": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "inputs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalculatorInputDto"
+            }
+          },
+          "result": {
+            "$ref": "#/components/schemas/CalculatorResultDto"
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "reportLogId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitMasterCreateDto": {
+        "type": "object",
+        "properties": {
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitMasterUpdateDto": {
+        "type": "object",
+        "properties": {
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Paste only the JWT (no 'Bearer ' prefix).",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

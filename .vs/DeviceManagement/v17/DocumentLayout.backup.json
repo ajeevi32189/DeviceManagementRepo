@@ -1,0 +1,219 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\services\\deviceservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:services\\deviceservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\dtos\\devicedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:dtos\\devicedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\models\\device\\modelspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:models\\device\\modelspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\models\\device\\modelcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:models\\device\\modelcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\models\\device\\modelparameter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:models\\device\\modelparameter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\controllers\\devicecontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:controllers\\devicecontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|c:\\users\\lenovo\\onedrive\\desktop\\devicemanagement\\devicemanagement_with_auth_updated_with_roomlayout\\devicemanagement_with_auth (1)\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A8219E-6926-D0A4-1E76-6D288E0A08D9}|DeviceManagement.csproj|solutionrelative:controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-08-24T11:43:53.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-24T11:02:51.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ModelSpecification.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Models\\Device\\ModelSpecification.cs",
+              "RelativeDocumentMoniker": "Models\\Device\\ModelSpecification.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Models\\Device\\ModelSpecification.cs",
+              "RelativeToolTip": "Models\\Device\\ModelSpecification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:12:25.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ModelCategory.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Models\\Device\\ModelCategory.cs",
+              "RelativeDocumentMoniker": "Models\\Device\\ModelCategory.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Models\\Device\\ModelCategory.cs",
+              "RelativeToolTip": "Models\\Device\\ModelCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:12:20.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DeviceDtos.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Dtos\\DeviceDtos.cs",
+              "RelativeDocumentMoniker": "Dtos\\DeviceDtos.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Dtos\\DeviceDtos.cs",
+              "RelativeToolTip": "Dtos\\DeviceDtos.cs",
+              "ViewState": "AgIAACgCAAAAAAAAAAAUwD8CAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:11:29.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DeviceServices.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Services\\DeviceServices.cs",
+              "RelativeDocumentMoniker": "Services\\DeviceServices.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Services\\DeviceServices.cs",
+              "RelativeToolTip": "Services\\DeviceServices.cs",
+              "ViewState": "AgIAAKMDAAAAAAAAAAA0wL0DAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:01:55.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DeviceControllers.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Controllers\\DeviceControllers.cs",
+              "RelativeDocumentMoniker": "Controllers\\DeviceControllers.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Controllers\\DeviceControllers.cs",
+              "RelativeToolTip": "Controllers\\DeviceControllers.cs",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAqwBEBAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:01:37.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAADgvyMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T11:02:39.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RoomService.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Services\\RoomService.cs",
+              "RelativeDocumentMoniker": "Services\\RoomService.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Services\\RoomService.cs",
+              "RelativeToolTip": "Services\\RoomService.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAwDMAAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T09:18:44.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ModelParameter.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Models\\Device\\ModelParameter.cs",
+              "RelativeDocumentMoniker": "Models\\Device\\ModelParameter.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Models\\Device\\ModelParameter.cs",
+              "RelativeToolTip": "Models\\Device\\ModelParameter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T10:12:33.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RoomController.cs",
+              "DocumentMoniker": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Controllers\\RoomController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RoomController.cs",
+              "ToolTip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\DeviceManagement\\DeviceManagement_With_Auth_updated_with_RoomLayout\\DeviceManagement_With_Auth (1)\\Controllers\\RoomController.cs",
+              "RelativeToolTip": "Controllers\\RoomController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-24T09:18:34.042Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

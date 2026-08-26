@@ -1,0 +1,3 @@
+wwwroot\assets\ajeevi-logo.png
+wwwroot\preview.html
+wwwroot\room-layout-test-client.html
