@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Room Layout — SignalR Test Client</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+  label { display: block; margin-top: 12px; font-size: 13px; color: #444; }
+  input { width: 100%; padding: 8px; box-sizing: border-box; font-size: 14px; }
+  button { margin-top: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+  #log { margin-top: 20px; background: #111; color: #0f0; padding: 12px; height: 300px;
+         overflow-y: auto; font-family: monospace; font-size: 12px; white-space: pre-wrap; border-radius: 6px; }
+  .status { font-weight: bold; }
+  .ok { color: green; } .bad { color: crimson; }
+</style>
+</head>
+<body>
+  <h2>Room Layout — SignalR Test Client</h2>
+  <p>Isko <b>do alag browser tabs</b> mein khol ke, same Floor ID daal ke Join karo. Ek tab se Swagger/Postman se
+     <code>PATCH api/Room/{id}/update-geometry</code> call karo — doosre tab mein event turant dikhna chahiye.</p>
+
+  <label>API Base URL (jaise https://localhost:7100 — trailing slash mat lagana)</label>
+  <input id="baseUrl" value="https://localhost:7100" />
+
+  <label>JWT Token (bina "Bearer " prefix ke)</label>
+  <input id="token" placeholder="eyJhbGciOi..." />
+
+  <label>Floor ID (jis floor ka room test kar rahe ho)</label>
+  <input id="floorId" placeholder="guid yaha paste karo" />
+
+  <button onclick="connect()">Connect + Join Floor</button>
+  <button onclick="leaveFloor()">Leave Floor</button>
+
+  <p>Status: <span id="status" class="status bad">Disconnected</span></p>
+
+  <div id="log"></div>
+
+<script>
+let connection = null;
+
+function log(msg, isEvent) {
+  const el = document.getElementById('log');
+  const time = new Date().toLocaleTimeString();
+  el.textContent += `[${time}] ${isEvent ? '🔔 ' : ''}${msg}\n`;
+  el.scrollTop = el.scrollHeight;
+}
+
+async function connect() {
+  const baseUrl = document.getElementById('baseUrl').value.trim();
+  const token = document.getElementById('token').value.trim();
+  const floorId = document.getElementById('floorId').value.trim();
+
+  if (!baseUrl || !token || !floorId) {
+    alert('Base URL, Token, aur Floor ID teeno bharo.');
+    return;
+  }
+
+  if (connection) {
+    await connection.stop();
+  }
+
+  connection = new signalR.HubConnectionBuilder()
+    .withUrl(`${baseUrl}/hubs/room-layout?access_token=${encodeURIComponent(token)}`)
+    .withAutomaticReconnect()
+    .build();
+
+  connection.on('RoomGeometryUpdated', (payload) => {
+    log('RoomGeometryUpdated received:\n' + JSON.stringify(payload, null, 2), true);
+  });
+
+  connection.onreconnecting(() => {
+    document.getElementById('status').textContent = 'Reconnecting...';
+    document.getElementById('status').className = 'status bad';
+  });
+
+  try {
+    await connection.start();
+    document.getElementById('status').textContent = 'Connected';
+    document.getElementById('status').className = 'status ok';
+    log('Connected to hub.');
+
+    await connection.invoke('JoinFloor', floorId);
+    log(`Joined floor group: ${floorId}`);
+  } catch (err) {
+    document.getElementById('status').textContent = 'Connection failed';
+    document.getElementById('status').className = 'status bad';
+    log('ERROR: ' + err);
+  }
+}
+
+async function leaveFloor() {
+  const floorId = document.getElementById('floorId').value.trim();
+  if (!connection || !floorId) return;
+  try {
+    await connection.invoke('LeaveFloor', floorId);
+    log(`Left floor group: ${floorId}`);
+  } catch (err) {
+    log('ERROR: ' + err);
+  }
+}
+</script>
+</body>
+</html>

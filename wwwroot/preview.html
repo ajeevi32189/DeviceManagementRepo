@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Centre Calculator Tools — Ajeevi DCIM</title>
+<style>
+  :root{
+    --navy:#0E2A3F;
+    --navy2:#133A52;
+    --teal:#0E8388;
+    --teal-light:#E4F3F3;
+    --amber:#E8A33D;
+    --amber-light:#FCF0DD;
+    --ink:#16232B;
+    --muted:#5A6B72;
+    --line:#D7E2E2;
+    --bg:#F6FAFA;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family: Calibri, "Segoe UI", Arial, sans-serif;
+  }
+  h1,h2,h3{ font-family: Cambria, Georgia, "Times New Roman", serif; margin:0; }
+  header{
+    background: var(--navy); color:#fff; padding: 36px 6vw 30px;
+    position:relative; overflow:hidden;
+  }
+  header::before{
+    content:""; position:absolute; right:-80px; top:-120px;
+    width:340px; height:340px; border-radius:50%;
+    background: var(--navy2); border:1px solid #1c4a63;
+  }
+  header::after{
+    content:""; position:absolute; right:-30px; top:-70px;
+    width:220px; height:220px; border-radius:50%;
+    border:1.5px solid var(--teal); opacity:0.55;
+  }
+  .eyebrow{ letter-spacing:2px; font-size:12px; font-weight:700; color:#7fc3c6; text-transform:uppercase; }
+  header h1{ font-size:clamp(28px,4vw,42px); font-weight:700; margin:10px 0 8px; position:relative; z-index:1; }
+  header p{ color:#c7d9dc; font-size:15px; max-width:640px; margin:0; position:relative; z-index:1; }
+  .accent-rule{ width:46px; height:3px; background:var(--amber); margin:16px 0 0; position:relative; z-index:1; }
+  nav{
+    display:flex; gap:8px; flex-wrap:wrap; padding: 18px 6vw; background:var(--white);
+    border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10;
+  }
+  nav button{
+    border:1px solid var(--line); background:var(--white); color:var(--navy);
+    padding:8px 16px; border-radius:20px; font-size:13px; font-weight:700;
+    cursor:pointer; transition: all .15s ease; font-family: Calibri, sans-serif;
+  }
+  nav button:hover{ border-color: var(--teal); }
+  nav button.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  main{ padding: 34px 6vw 70px; max-width:1280px; margin:0 auto; }
+  .cat-block{ margin-bottom:46px; }
+  .cat-block .cat-kicker{ color:var(--teal); font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; }
+  .cat-block h2{ font-size:26px; color:var(--navy); margin:8px 0 6px; }
+  .cat-block .cat-sub{ color:var(--muted); font-size:13.5px; margin-bottom:22px; max-width:760px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px; }
+  .card{
+    background:var(--white); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; box-shadow:0 2px 10px rgba(14,42,63,0.06);
+    display:flex; flex-direction:column;
+  }
+  .card .card-top{ height:5px; }
+  .card.teal .card-top{ background:var(--teal); }
+  .card.amber .card-top{ background:var(--amber); }
+  .card-body{ padding:20px 22px 22px; flex:1; display:flex; flex-direction:column; }
+  .card h3{ font-size:16.5px; color:var(--navy); margin-bottom:4px; }
+  .card .desc{ color:var(--muted); font-size:12.5px; line-height:1.5; margin-bottom:14px; }
+  .field{ margin-bottom:11px; }
+  .field label{ display:block; font-size:11.5px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+  .field .row{ display:flex; gap:8px; align-items:center; }
+  .field input, .field select{
+    width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:6px;
+    font-size:13px; font-family: Calibri, sans-serif; color:var(--ink); background:#fbfdfd;
+  }
+  .field input:focus, .field select:focus{ outline:none; border-color:var(--teal); background:#fff; }
+  .field .unit{ font-size:12px; color:var(--muted); white-space:nowrap; }
+  .result{
+    margin-top:auto; padding-top:14px; border-top:1px dashed var(--line);
+  }
+  .result .r-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;}
+  .result .r-value{ font-family: Cambria, serif; font-size:26px; font-weight:700; color:var(--navy); margin-top:2px;}
+  .result .r-value span.unit{ font-size:14px; color:var(--muted); font-family: Calibri, sans-serif; font-weight:400; }
+  .result .r-note{ font-size:11.5px; color:var(--teal); margin-top:4px; font-style:italic;}
+  .card.amber .result .r-note{ color:#B8791F; }
+  .result .r-flag{ display:inline-block; margin-top:6px; padding:3px 9px; border-radius:12px; font-size:11px; font-weight:700; }
+  .flag-ok{ background:var(--teal-light); color:#0B6A6D; }
+  .flag-warn{ background:var(--amber-light); color:#96650F; }
+  .formula-hint{
+    background: var(--navy); color:#9FE8E8; font-family: "Consolas", monospace;
+    font-size:10.8px; padding:9px 11px; border-radius:6px; margin-bottom:14px; line-height:1.5;
+  }
+  .card.amber .formula-hint{ color:#FFD9A0; }
+  .send-report-btn{
+    margin-top:14px; width:100%; padding:9px 12px; border-radius:6px; border:1px solid var(--navy);
+    background:var(--navy); color:#fff; font-family:Calibri, sans-serif; font-size:12.5px; font-weight:700;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:background .15s ease;
+  }
+  .send-report-btn:hover{ background:var(--navy2); }
+  .send-report-btn svg{ width:14px; height:14px; flex:none; }
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(14,42,63,0.55); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{
+    background:#fff; border-radius:12px; width:100%; max-width:420px; padding:26px 26px 22px;
+    box-shadow:0 20px 60px rgba(14,42,63,0.35); position:relative;
+  }
+  .modal-box h3{ font-size:19px; color:var(--navy); margin-bottom:6px; }
+  .modal-box .modal-sub{ font-size:12.5px; color:var(--muted); margin-bottom:18px; line-height:1.5; }
+  .modal-box .close-x{
+    position:absolute; top:14px; right:16px; border:none; background:none; font-size:20px;
+    color:var(--muted); cursor:pointer; line-height:1;
+  }
+  .modal-box label{ display:block; font-size:11.5px; font-weight:700; color:var(--navy); margin-bottom:5px; }
+  .modal-box input[type=email]{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:7px; font-size:14px;
+    font-family:Calibri, sans-serif; margin-bottom:6px;
+  }
+  .modal-box input[type=email]:focus{ outline:none; border-color:var(--teal); }
+  .modal-err{ font-size:11.5px; color:#B3261E; min-height:15px; margin-bottom:10px; }
+  .modal-actions{ display:flex; gap:10px; margin-top:6px; }
+  .modal-actions button{
+    flex:1; padding:10px 14px; border-radius:7px; font-size:13px; font-weight:700; cursor:pointer;
+    font-family:Calibri, sans-serif; border:1px solid var(--line);
+  }
+  .btn-cancel{ background:#fff; color:var(--muted); }
+  .btn-submit{ background:var(--teal); color:#fff; border-color:var(--teal); }
+  .btn-submit:disabled{ opacity:0.6; cursor:not-allowed; }
+  .modal-status{ font-size:12.5px; margin-top:12px; text-align:center; line-height:1.5; }
+  .modal-status.ok{ color:#0B6A6D; }
+  .modal-status.fail{ color:#B3261E; }
+  .modal-calc-name{
+    display:inline-block; background:var(--teal-light); color:#0B6A6D; font-size:11px; font-weight:700;
+    padding:3px 10px; border-radius:12px; margin-bottom:14px;
+  }
+  .modal-mode-tabs{ display:flex; gap:8px; margin-bottom:16px; }
+  .mode-tab{
+    flex:1; padding:9px 10px; border-radius:8px; border:1px solid var(--line);
+    background:#fff; color:var(--navy); cursor:pointer; font-size:12.5px; font-weight:700;
+    font-family:Calibri, sans-serif; transition: all .15s ease;
+  }
+  .mode-tab.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  footer{
+    background:var(--navy); color:#9fb4ba; text-align:center; padding:22px 6vw; font-size:11.5px;
+  }
+  footer b{ color:#fff; }
+  @media (max-width: 640px){
+    nav{ position:static; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Ajeevi Data Centre · DCIM Planning Module</div>
+  <h1>Data Centre Calculator Tools</h1>
+  <p>Ten live calculators — enter your own numbers and get instant sizing, efficiency and capacity results.</p>
+  <div class="accent-rule"></div>
+</header>
+
+<nav id="catNav">
+  <button data-cat="power" class="active">Power &amp; Backup</button>
+  <button data-cat="cooling">Efficiency &amp; Cooling</button>
+  <button data-cat="capacity">Capacity &amp; Reliability</button>
+  <button data-cat="business">Business Case</button>
+</nav>
+
+<main id="main"></main>
+
+<footer>
+  Built for <b>Ajeevi Data Centre</b> — DCIM Planning &amp; Sizing Module. Formulas use standard data centre
+  engineering approximations for planning; validate final procurement sizing with a certified consultant.
+</footer>
+
+<!-- ---------- Send Report Modal ---------- -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-box">
+    <button class="close-x" id="modalClose" aria-label="Close">&times;</button>
+    <div class="modal-calc-name" id="modalCalcName">Calculator</div>
+    <h3>Get this report</h3>
+    <p class="modal-sub">We'll generate a Word/PDF report with this calculation, an explanation of the
+      calculator, and recommendations.</p>
+
+    <div class="modal-mode-tabs" id="modalModeTabs">
+      <button type="button" class="mode-tab active" id="modeTabPdf">💾 Save as PDF</button>
+      <button type="button" class="mode-tab" id="modeTabEmail">📧 Send to Email</button>
+    </div>
+
+    <div id="emailFieldWrap" style="display:none;">
+      <label for="modalEmail">Email address</label>
+      <input type="email" id="modalEmail" placeholder="name@company.com">
+    </div>
+
+    <div class="modal-err" id="modalErr"></div>
+    <div class="modal-actions" id="modalActions">
+      <button class="btn-cancel" id="modalCancel">Cancel</button>
+      <button class="btn-submit" id="modalSubmit">Download PDF</button>
+    </div>
+    <div class="modal-status" id="modalStatus"></div>
+  </div>
+</div>
+
+<script>
+function fmt(n, d=2){
+  if (!isFinite(n)) return "—";
+  var rounded = parseFloat(n.toFixed(d));
+  var parts = rounded.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
+
+const CALCS = [
+  {
+    id:"power", cat:"power", color:"amber",
+    name:"Power Load Calculator",
+    desc:"Total electrical load a data centre must supply — the foundation for UPS, generator and cooling sizing.",
+    formula:"Total Load (kW) = IT + Cooling + Lighting + Auxiliary",
+    inputs:[
+      {id:"it", label:"IT Equipment Load", unit:"kW", def:400},
+      {id:"cool", label:"Cooling Load", unit:"kW", def:350},
+      {id:"light", label:"Lighting Load", unit:"kW", def:15},
+      {id:"aux", label:"Auxiliary Load", unit:"kW", def:10},
+    ],
+    calc:(v)=>{
+      const total = v.it + v.cool + v.light + v.aux;
+      return {value: fmt(total), unit:"kW", note:`IT ${v.it} + Cooling ${v.cool} + Lighting ${v.light} + Aux ${v.aux}`};
+    }
+  },
+  {
+    id:"ups", cat:"power", color:"amber",
+    name:"UPS Sizing Calculator",
+    desc:"Determines required UPS capacity in kVA, including a safety/redundancy margin.",
+    formula:"UPS (kVA) = (Critical Load ÷ Power Factor) × (1 + Margin%)",
+    inputs:[
+      {id:"load", label:"Critical IT Load", unit:"kW", def:400},
+      {id:"pf", label:"Power Factor", unit:"0–1", def:0.9, step:0.01},
+      {id:"margin", label:"Safety Margin", unit:"%", def:25},
+    ],
+    calc:(v)=>{
+      const kva = (v.load / v.pf) * (1 + v.margin/100);
+      return {value: fmt(kva), unit:"kVA", note:`Recommend nearest standard size ≥ ${fmt(kva,0)} kVA`};
+    }
+  },
+  {
+    id:"battery", cat:"power", color:"amber",
+    name:"Battery Backup Runtime Calculator",
+    desc:"Estimates how long the UPS battery bank can support the load during a mains failure.",
+    formula:"Runtime (min) = (Battery kWh ÷ Load kW) × 60",
+    inputs:[
+      {id:"bat", label:"Battery Bank Capacity", unit:"kWh", def:50},
+      {id:"load", label:"Connected Load at Outage", unit:"kW", def:400},
+    ],
+    calc:(v)=>{
+      const min = (v.bat / v.load) * 60;
+      const flag = min < 5 ? {cls:"flag-warn", txt:"Low autonomy — verify DG start time"} : {cls:"flag-ok", txt:"Within typical DG changeover window"};
+      return {value: fmt(min,1), unit:"minutes", note:`${v.bat} kWh supporting ${v.load} kW load`, flag};
+    }
+  },
+  {
+    id:"gen", cat:"power", color:"amber",
+    name:"Generator (DG) Sizing Calculator",
+    desc:"Determines DG capacity needed to support full critical load plus starting current.",
+    formula:"DG (kVA) = (Critical Load ÷ Power Factor) × (1 + Margin%)",
+    inputs:[
+      {id:"load", label:"Critical Load", unit:"kW", def:775},
+      {id:"pf", label:"Power Factor", unit:"0–1", def:0.8, step:0.01},
+      {id:"margin", label:"Safety Margin", unit:"%", def:25},
+    ],
+    calc:(v)=>{
+      const kva = (v.load / v.pf) * (1 + v.margin/100);
+      return {value: fmt(kva), unit:"kVA", note:`Recommend nearest standard DG set ≥ ${fmt(kva,0)} kVA`};
+    }
+  },
+  {
+    id:"pue", cat:"cooling", color:"teal",
+    name:"PUE Calculator",
+    desc:"Power Usage Effectiveness — how efficiently the facility uses energy. Closer to 1.0 is better.",
+    formula:"PUE = Total Facility Power ÷ IT Equipment Power",
+    inputs:[
+      {id:"total", label:"Total Facility Power", unit:"kW", def:775},
+      {id:"itp", label:"IT Equipment Power", unit:"kW", def:400},
+    ],
+    calc:(v)=>{
+      const pue = v.total / v.itp;
+      const flag = pue <= 1.6 ? {cls:"flag-ok", txt:"Good practice range (≤1.6)"} : {cls:"flag-warn", txt:"Above good-practice target"};
+      return {value: fmt(pue), unit:"PUE", note:`DCiE (efficiency) = ${fmt(100/pue,1)}%`, flag};
+    }
+  },
+  {
+    id:"cooling", cat:"cooling", color:"teal",
+    name:"Cooling Capacity Calculator",
+    desc:"Cooling capacity required to remove the heat generated by IT and electrical load.",
+    formula:"Cooling (kW) = IT Heat Load × Safety Factor  |  BTU/hr = kW × 3412",
+    inputs:[
+      {id:"heat", label:"IT Heat Load", unit:"kW", def:400},
+      {id:"sf", label:"Safety Factor", unit:"×", def:1.2, step:0.05},
+    ],
+    calc:(v)=>{
+      const kw = v.heat * v.sf;
+      const btu = kw * 3412;
+      return {value: fmt(kw), unit:"kW", note:`≈ ${fmt(btu,0)} BTU/hr required cooling capacity`};
+    }
+  },
+  {
+    id:"density", cat:"cooling", color:"teal",
+    name:"Rack Power Density Calculator",
+    desc:"Average power consumed per rack — flags overloaded racks and guides placement.",
+    formula:"Density (kW/rack) = Total IT Load ÷ Number of Racks",
+    inputs:[
+      {id:"load", label:"Total IT Power Load", unit:"kW", def:400},
+      {id:"racks", label:"Number of Racks", unit:"count", def:805, step:1},
+    ],
+    calc:(v)=>{
+      const d = v.load / v.racks;
+      return {value: fmt(d,3), unit:"kW/rack", note:"Compare against each rack's rated capacity"};
+    }
+  },
+  {
+    id:"capacity", cat:"capacity", color:"amber",
+    name:"Data Centre Capacity Calculator",
+    desc:"Available headroom for growth across power, racks, floor or cooling.",
+    formula:"Available % = (Installed − Used) ÷ Installed × 100",
+    inputs:[
+      {id:"installed", label:"Installed Capacity", unit:"kW", def:1000},
+      {id:"used", label:"Used Capacity", unit:"kW", def:775},
+    ],
+    calc:(v)=>{
+      const pct = ((v.installed - v.used) / v.installed) * 100;
+      const flag = pct < 15 ? {cls:"flag-warn", txt:"Low headroom — plan expansion soon"} : {cls:"flag-ok", txt:"Healthy headroom for growth"};
+      return {value: fmt(pct,1), unit:"% available", note:`${fmt(v.installed-v.used,0)} kW headroom remaining`, flag};
+    }
+  },
+  {
+    id:"uptime", cat:"capacity", color:"amber",
+    name:"Availability / Uptime Calculator",
+    desc:"Percentage of time the facility is operational — feeds the DCIM Health Index.",
+    formula:"Availability % = (Total Time − Downtime) ÷ Total Time × 100",
+    inputs:[
+      {id:"total", label:"Total Time in Period", unit:"hours/yr", def:8760},
+      {id:"down", label:"Downtime in Period", unit:"hours", def:1.6, step:0.1},
+    ],
+    calc:(v)=>{
+      const pct = ((v.total - v.down) / v.total) * 100;
+      let tier = "Below Tier I";
+      if (pct >= 99.995) tier = "Tier IV equivalent";
+      else if (pct >= 99.982) tier = "Tier III equivalent";
+      else if (pct >= 99.749) tier = "Tier II equivalent";
+      else if (pct >= 99.671) tier = "Tier I equivalent";
+      return {value: fmt(pct,3), unit:"% uptime", note:tier};
+    }
+  },
+  {
+    id:"roi", cat:"business", color:"teal",
+    name:"ROI / TCO Calculator",
+    desc:"Turns technical savings into a business case management can approve.",
+    formula:"TCO = CAPEX + (OPEX × Years)  |  ROI% = (Savings ÷ Investment) × 100",
+    inputs:[
+      {id:"invest", label:"Investment / CAPEX", unit:"₹", def:5000000, step:10000},
+      {id:"savings", label:"Annual Savings", unit:"₹/yr", def:1500000, step:10000},
+      {id:"opex", label:"Annual OPEX", unit:"₹/yr", def:500000, step:10000},
+      {id:"years", label:"Period", unit:"years", def:3, step:1},
+    ],
+    calc:(v)=>{
+      const roi = (v.savings / v.invest) * 100;
+      const tco = v.invest + (v.opex * v.years);
+      const payback = v.invest / v.savings;
+      return {value: fmt(roi,1), unit:"% ROI / yr", note:`TCO over ${v.years} yrs = ₹${fmt(tco,0)} · Payback ≈ ${fmt(payback,1)} yrs`};
+    }
+  },
+];
+
+const CATS = {
+  power:   {title:"Power &amp; Backup", sub:"Everything needed to keep the critical load alive during an outage — sized correctly, not guessed."},
+  cooling: {title:"Efficiency &amp; Cooling", sub:"The metrics that feed directly into the DCIM Health Index score."},
+  capacity:{title:"Capacity &amp; Reliability", sub:"Answers “how much room is left” and “how reliable are we” — in one number each."},
+  business:{title:"Business Case", sub:"Translates every technical gain above into a number leadership can approve."},
+};
+
+const main = document.getElementById("main");
+
+function renderCategory(catId){
+  const block = document.createElement("div");
+  block.className = "cat-block";
+  block.id = "cat-" + catId;
+  const c = CATS[catId];
+  block.innerHTML = `<div class="cat-kicker">Module</div><h2>${c.title}</h2><p class="cat-sub">${c.sub}</p><div class="grid"></div>`;
+  const grid = block.querySelector(".grid");
+
+  CALCS.filter(x=>x.cat===catId).forEach(calc=>{
+    const card = document.createElement("div");
+    card.className = "card " + calc.color;
+    let inputsHtml = "";
+    calc.inputs.forEach(inp=>{
+      inputsHtml += `
+        <div class="field">
+          <label for="${calc.id}-${inp.id}">${inp.label}</label>
+          <div class="row">
+            <input type="number" id="${calc.id}-${inp.id}" value="${inp.def}" step="${inp.step || 'any'}">
+            <span class="unit">${inp.unit}</span>
+          </div>
+        </div>`;
+    });
+    card.innerHTML = `
+      <div class="card-top"></div>
+      <div class="card-body">
+        <h3>${calc.name}</h3>
+        <div class="desc">${calc.desc}</div>
+        <div class="formula-hint">${calc.formula}</div>
+        ${inputsHtml}
+        <div class="result">
+          <div class="r-label">Result</div>
+          <div class="r-value" id="${calc.id}-result">—</div>
+          <div class="r-note" id="${calc.id}-note"></div>
+          <div id="${calc.id}-flag"></div>
+        </div>
+        <button class="send-report-btn" data-calc-id="${calc.id}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+          Send Report
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+
+    function update(){
+      const v = {};
+      calc.inputs.forEach(inp=>{
+        v[inp.id] = parseFloat(card.querySelector(`#${calc.id}-${inp.id}`).value) || 0;
+      });
+      const r = calc.calc(v);
+      card.querySelector(`#${calc.id}-result`).innerHTML = `${r.value} <span class="unit">${r.unit}</span>`;
+      card.querySelector(`#${calc.id}-note`).textContent = r.note || "";
+      const flagEl = card.querySelector(`#${calc.id}-flag`);
+      flagEl.innerHTML = r.flag ? `<span class="result r-flag ${r.flag.cls}" style="margin-top:0;padding:3px 9px;">${r.flag.txt}</span>` : "";
+    }
+    calc.inputs.forEach(inp=>{
+      card.querySelector(`#${calc.id}-${inp.id}`).addEventListener("input", update);
+    });
+    update();
+
+    card.querySelector(".send-report-btn").addEventListener("click", ()=>{
+      openReportModal(calc, card);
+    });
+  });
+
+  main.appendChild(block);
+}
+
+Object.keys(CATS).forEach(renderCategory);
+
+const buttons = document.querySelectorAll("#catNav button");
+buttons.forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    buttons.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const target = btn.dataset.cat;
+    document.querySelectorAll(".cat-block").forEach(block=>{
+      block.style.display = (block.id === "cat-" + target) ? "" : "none";
+    });
+  });
+});
+document.querySelectorAll(".cat-block").forEach(block=>{
+  block.style.display = (block.id === "cat-power") ? "" : "none";
+});
+
+// ================= Send Report modal (PDF download + Email) =================
+const REPORT_SEND_ENDPOINT = "/api/Report/send";
+const REPORT_PDF_ENDPOINT  = "/api/Report/generate-pdf";
+
+const modalOverlay   = document.getElementById("reportModal");
+const modalCalcName  = document.getElementById("modalCalcName");
+const modalEmail     = document.getElementById("modalEmail");
+const modalErr       = document.getElementById("modalErr");
+const modalActions   = document.getElementById("modalActions");
+const modalStatus    = document.getElementById("modalStatus");
+const modalSubmit    = document.getElementById("modalSubmit");
+const modalCancel    = document.getElementById("modalCancel");
+const modalClose     = document.getElementById("modalClose");
+const modeTabPdf     = document.getElementById("modeTabPdf");
+const modeTabEmail   = document.getElementById("modeTabEmail");
+const emailFieldWrap = document.getElementById("emailFieldWrap");
+
+let activeCalc = null;
+let activeCard = null;
+let currentMode = "pdf";
+
+function setMode(mode){
+  currentMode = mode;
+  modeTabPdf.classList.toggle("active", mode === "pdf");
+  modeTabEmail.classList.toggle("active", mode === "email");
+  emailFieldWrap.style.display = (mode === "email") ? "" : "none";
+
+  // IMPORTANT: switching between PDF and Email must always re-enable the
+  // action area. A successful PDF/email operation must not disable the
+  // other option.
+  modalActions.style.display = "flex";
+  modalSubmit.disabled = false;
+  modalEmail.disabled = false;
+  modalSubmit.textContent = (mode === "pdf") ? "Download PDF" : "Send Report";
+  modalErr.textContent = "";
+  modalStatus.textContent = "";
+  modalStatus.className = "modal-status";
+}
+modeTabPdf.addEventListener("click", ()=> setMode("pdf"));
+modeTabEmail.addEventListener("click", ()=> setMode("email"));
+
+function openReportModal(calc, card){
+  activeCalc = calc;
+  activeCard = card;
+  modalCalcName.textContent = calc.name;
+  modalEmail.value = "";
+  modalErr.textContent = "";
+  modalStatus.textContent = "";
+  modalStatus.className = "modal-status";
+  modalActions.style.display = "flex";
+  modalEmail.disabled = false;
+  modalSubmit.disabled = false;
+  setMode("pdf");
+  modalOverlay.classList.add("open");
+}
+
+function closeReportModal(){
+  modalOverlay.classList.remove("open");
+  activeCalc = null;
+  activeCard = null;
+}
+
+modalCancel.addEventListener("click", closeReportModal);
+modalClose.addEventListener("click", closeReportModal);
+modalOverlay.addEventListener("click", (e)=>{ if (e.target === modalOverlay) closeReportModal(); });
+
+function isValidEmail(v){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+function buildPayload(){
+  const values = {};
+  activeCalc.inputs.forEach(inp=>{
+    values[inp.id] = parseFloat(activeCard.querySelector(`#${activeCalc.id}-${inp.id}`).value) || 0;
+  });
+  const result = activeCalc.calc(values);
+  return {
+    calculatorId: activeCalc.id,
+    calculatorName: activeCalc.name,
+    formula: activeCalc.formula,
+    inputs: activeCalc.inputs.map(inp => ({ label: inp.label, unit: inp.unit, value: values[inp.id] })),
+    result: { value: result.value, unit: result.unit, note: result.note },
+  };
+}
+
+modalSubmit.addEventListener("click", async ()=>{
+  modalErr.textContent = "";
+
+  if (currentMode === "email"){
+    const email = modalEmail.value.trim();
+    if (!isValidEmail(email)){
+      modalErr.textContent = "Please enter a valid email address.";
+      return;
+    }
+    modalSubmit.disabled = true;
+    modalEmail.disabled = true;
+    modalSubmit.textContent = "Sending…";
+
+    try{
+      const payload = { ...buildPayload(), email };
+      const res = await fetch(REPORT_SEND_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Server responded with status " + res.status);
+      modalStatus.className = "modal-status ok";
+      modalStatus.textContent = "✓ Report sent to " + email + ". Check the inbox shortly.";
+      // Keep the modal action area available so the user can switch to
+      // Save as PDF immediately after sending the email.
+      modalActions.style.display = "flex";
+      modalSubmit.disabled = false;
+      modalEmail.disabled = false;
+      modalSubmit.textContent = "Send Report";
+    } catch(err){
+      modalStatus.className = "modal-status fail";
+      modalStatus.textContent = "Couldn't reach the report service. Check that the .NET API is running and the endpoint is available.";
+      modalSubmit.disabled = false;
+      modalEmail.disabled = false;
+      modalSubmit.textContent = "Retry";
+    }
+    return;
+  }
+
+  modalSubmit.disabled = true;
+  modalSubmit.textContent = "Generating…";
+
+  try{
+    const payload = buildPayload();
+    const res = await fetch(REPORT_PDF_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Server responded with status " + res.status);
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = activeCalc.name.replace(/\s+/g, "_") + "_Report.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+
+    modalStatus.className = "modal-status ok";
+    modalStatus.textContent = "✓ PDF downloaded.";
+    // Keep the modal open and the action area enabled so the user can
+    // switch to Send to Email without reopening the report dialog.
+    modalActions.style.display = "flex";
+    modalSubmit.disabled = false;
+    modalSubmit.textContent = "Download PDF";
+  } catch(err){
+    modalStatus.className = "modal-status fail";
+    modalStatus.textContent = "Couldn't reach the report service. Check that the .NET API is running and the endpoint is available.";
+    modalSubmit.disabled = false;
+    modalSubmit.textContent = "Download PDF";
+  }
+});
+</script>
+
+</body>
+</html>

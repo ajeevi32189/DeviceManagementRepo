@@ -1,0 +1,29 @@
+UNMATCHED DATA REPORT
+============================================================
+Entity        : Floor
+Source file   : Floor_test_import_unmatched.csv
+Generated (UTC): 2026-08-27 06:40:15
+
+The following column(s) from your file do not exist as a field in the
+backend for this entity, so their values were NOT saved to the database.
+They are listed below so nothing is lost — you can review them here or
+ask for these fields to be added to the backend.
+
+Unmatched column(s):
+  - Vendor
+  - InstalledBy
+  - WarrantyYears
+
+------------------------------------------------------------
+Row-by-row values:
+------------------------------------------------------------
+Row 2:
+    Vendor = Siemens
+    InstalledBy = Ramesh Kumar
+    WarrantyYears = 5
+
+Row 3:
+    Vendor = Legrand
+    InstalledBy = Suresh Yadav
+    WarrantyYears = 3
+
