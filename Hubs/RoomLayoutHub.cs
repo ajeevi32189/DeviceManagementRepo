@@ -34,5 +34,33 @@ namespace DeviceManagementOnly.Hubs
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, FloorGroup(floorId));
         }
+
+        // ══════════════════════════════════════════════════════════
+        //  5D VIEW ke events — server se client ko ye naam aate hain.
+        //  Frontend inhi par listener lagaye:
+        //
+        //    RoomGeometryUpdated  { ... }   room move/resize/rotate hua
+        //    PlacementMoved       { ... }   farsh ka koi device hila
+        //    LayoutSaved          { floorId, revision, savedBy, savedAt }
+        //                                   kisi ne poora layout save kiya --
+        //                                   aapka revision purana ho gaya,
+        //                                   dobara load kar lijiye
+        //    LayoutLockChanged    { ...LayoutLockDto }
+        //                                   lock laga ya hata -- 5D ko turant
+        //                                   view-only ya editable kar dijiye
+        //    LayoutEditStarted    { ...LayoutLockDto }
+        //                                   kisi ne edit mode on kiya --
+        //                                   baaki sabko "X edit kar raha hai"
+        //    LayoutEditEnded      { ...LayoutLockDto }
+        //                                   edit mode band -- ab koi bhi le sakta hai
+        //
+        //  Dhyan rahe: lease par expiry hai. Agar koi tab band karke chala
+        //  jaaye to hub ko pata nahi chalta, par lease khud time nikalne par
+        //  chhoot jaati hai -- isliye layout kabhi hamesha ke liye block nahi
+        //  hota.
+        // ══════════════════════════════════════════════════════════
+
+        /// <summary>Connection zinda hai — client chaahe to ping kar sakta hai.</summary>
+        public Task<string> Ping() => Task.FromResult("pong");
     }
 }

@@ -1,0 +1,57 @@
+# ── Build output ────────────────────────────────────────────────
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Ll]og/
+[Ll]ogs/
+*.dll
+*.pdb
+*.cache
+*.user
+*.userosscache
+*.sln.docstates
+
+# ── Visual Studio ka apna cache ─────────────────────────────────
+# Ye folder VS khud lock karke rakhta hai -- track karoge to commit
+# "Unable to process path .vs/..." kehkar fail hota hai.
+.vs/
+*.suo
+*.vsidx
+*.vspscc
+*.vssscc
+.vshistory/
+
+# ── Rider / VS Code ─────────────────────────────────────────────
+.idea/
+*.sln.iml
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ── NuGet ───────────────────────────────────────────────────────
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+*.nuget.props
+*.nuget.targets
+
+# ── Local config -- isme connection string aur password hote hain,
+#    inhe kabhi commit mat karo ───────────────────────────────────
+appsettings.Local.json
+appsettings.*.Local.json
+*.pfx
+*.key
+secrets.json
+
+# ── Runtime / generated ─────────────────────────────────────────
+uploads/importlogs/
+wwwroot/temp/
+TestResults/
+*.received.*
+
+# ── OS ──────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

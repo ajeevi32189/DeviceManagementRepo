@@ -115,6 +115,10 @@ builder.Services.AddScoped<IDeviceConnectionConfigService, DeviceConnectionConfi
 builder.Services.AddScoped<IModelProtocolService, ModelProtocolService>();
 builder.Services.AddScoped<INetworkConnectionService, NetworkConnectionService>();
 
+// ── 5D View ─────────────────────────────────────────────────────
+builder.Services.AddScoped<IDataCenterService, DataCenterService>();
+builder.Services.AddScoped<ILayoutService, LayoutService>();
+
 
 builder.Services.AddScoped<IDocxReportBuilder, DocxReportBuilder>();
 builder.Services.AddScoped<IPdfConverterService, PdfConverterService>();

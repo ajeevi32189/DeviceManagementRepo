@@ -66,6 +66,14 @@ namespace DeviceManagementOnly.Common
         public Guid? DeviceTypeId { get; set; }
     }
 
+    public class DataCenterFilterParams : PaginationParams
+    {
+        public Guid? SiteId { get; set; }
+        public Guid? TenantId { get; set; }
+        public Guid? CountryId { get; set; }
+        public string? Status { get; set; }
+    }
+
     public class RoomFilterParams : PaginationParams
     {
         public Guid? FloorId { get; set; }

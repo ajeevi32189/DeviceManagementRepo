@@ -75,6 +75,34 @@ namespace DeviceManagement.Data
         // ── Model Protocol Profiles & Points ─────────────────────────
         public DbSet<ModelProtocolProfile> ModelProtocolProfiles => Set<ModelProtocolProfile>();
         public DbSet<ModelProtocolPoint> ModelProtocolPoints => Set<ModelProtocolPoint>();
+
+        // ==========================================================
+        //  5D VIEW - layout / geometry group
+        //  DataCenter -> Floor -> Room -> Rack -> Device, aur uske saath
+        //  farsh par khade device, cable tray, cable, pipe aur tile.
+        // ==========================================================
+        public DbSet<DataCenter> DataCenters => Set<DataCenter>();
+        public DbSet<DeviceFloorPlacement> DeviceFloorPlacements => Set<DeviceFloorPlacement>();
+        public DbSet<CableTray> CableTrays => Set<CableTray>();
+        public DbSet<CableConnection> CableConnections => Set<CableConnection>();
+        public DbSet<PipeConnection> PipeConnections => Set<PipeConnection>();
+        public DbSet<FloorTile> FloorTiles => Set<FloorTile>();
+        public DbSet<LayoutView> LayoutViews => Set<LayoutView>();
+        public DbSet<LayoutLock> LayoutLocks => Set<LayoutLock>();
+
+        // ==========================================================
+        //  AUDIT SUPPRESSION
+        //
+        //  SaveChangesAsync har badle hue column ka ek AuditLog row
+        //  banata hai. 5D ka bulk layout save ek hi baar me 97 device +
+        //  300 cable likhta hai - us par ye lakhon audit rows bana dega
+        //  aur save bahut dheema ho jayega.
+        //
+        //  Isliye LayoutService bulk save ke waqt ise true kar deta hai
+        //  aur khud ek summary audit row likh deta hai. Baaki kahin bhi
+        //  ise chhuna nahi hai.
+        // ==========================================================
+        public bool SuppressAudit { get; set; } = false;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -235,6 +263,119 @@ namespace DeviceManagement.Data
                 .HasForeignKey(dl => dl.RackId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            // ======================================================
+            //  5D VIEW - layout relations
+            // ======================================================
+
+            modelBuilder.Entity<DataCenter>()
+                .HasIndex(d => d.Code)
+                .IsUnique();
+
+            // Floor -> DataCenter (SetNull: DC hatne par floor zinda rahe)
+            modelBuilder.Entity<Floor>()
+                .HasOne<DataCenter>()
+                .WithMany()
+                .HasForeignKey(f => f.DataCenterId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // DeviceFloorPlacement -> Floor (cascade)
+            modelBuilder.Entity<DeviceFloorPlacement>()
+                .HasOne(p => p.Floor)
+                .WithMany()
+                .HasForeignKey(p => p.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // -> Room (SetNull: room hatne par device yard me chala jaye, delete na ho)
+            modelBuilder.Entity<DeviceFloorPlacement>()
+                .HasOne(p => p.Room)
+                .WithMany()
+                .HasForeignKey(p => p.RoomId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // -> DeviceDetail (SetNull: asset hatne par placement provisional
+            // ho jaye, 3D se gayab na ho)
+            modelBuilder.Entity<DeviceFloorPlacement>()
+                .HasOne(p => p.DeviceDetail)
+                .WithMany()
+                .HasForeignKey(p => p.DeviceDetailId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Ek asset ek hi jagah khada ho sakta hai
+            modelBuilder.Entity<DeviceFloorPlacement>()
+                .HasIndex(p => p.DeviceDetailId)
+                .IsUnique();
+
+            // Scene load ki main query
+            modelBuilder.Entity<DeviceFloorPlacement>()
+                .HasIndex(p => new { p.FloorId, p.IsActive });
+
+            modelBuilder.Entity<DeviceFloorPlacement>()
+                .HasIndex(p => p.RoomId);
+
+            // CableTray -> Floor (cascade)
+            modelBuilder.Entity<CableTray>()
+                .HasOne(t => t.Floor)
+                .WithMany()
+                .HasForeignKey(t => t.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Ek floor par tray code dohraya na jaye
+            modelBuilder.Entity<CableTray>()
+                .HasIndex(t => new { t.FloorId, t.TrayCode })
+                .IsUnique();
+
+            // CableConnection -> Floor (cascade)
+            modelBuilder.Entity<CableConnection>()
+                .HasOne(c => c.Floor)
+                .WithMany()
+                .HasForeignKey(c => c.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CableConnection>()
+                .HasIndex(c => new { c.FloorId, c.IsActive });
+            modelBuilder.Entity<CableConnection>()
+                .HasIndex(c => c.FromPlacementId);
+            modelBuilder.Entity<CableConnection>()
+                .HasIndex(c => c.ToPlacementId);
+
+            // PipeConnection -> Floor (cascade)
+            modelBuilder.Entity<PipeConnection>()
+                .HasOne(p => p.Floor)
+                .WithMany()
+                .HasForeignKey(p => p.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PipeConnection>()
+                .HasIndex(p => new { p.FloorId, p.IsActive });
+
+            // FloorTile -> Floor (cascade)
+            modelBuilder.Entity<FloorTile>()
+                .HasOne(t => t.Floor)
+                .WithMany()
+                .HasForeignKey(t => t.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FloorTile>()
+                .HasIndex(t => new { t.FloorId, t.IsActive });
+
+            // LayoutView -> Floor (cascade)
+            modelBuilder.Entity<LayoutView>()
+                .HasOne(v => v.Floor)
+                .WithMany()
+                .HasForeignKey(v => v.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // LayoutLock -> Floor (cascade) - har floor ka ek hi lock row
+            modelBuilder.Entity<LayoutLock>()
+                .HasOne(l => l.Floor)
+                .WithMany()
+                .HasForeignKey(l => l.FloorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<LayoutLock>()
+                .HasIndex(l => l.FloorId)
+                .IsUnique();
+
             // DeviceConnectionConfig → DeviceDetail (cascade)
             modelBuilder.Entity<DeviceConnectionConfig>()
                 .HasOne(c => c.DeviceDetail)
@@ -357,6 +498,15 @@ namespace DeviceManagement.Data
             foreach (var entry in ChangeTracker.Entries())
             {
                 if (entry.Entity is AuditLog) continue;
+
+                // Bulk layout save: CreatedBy/UpdatedBy bharte raho, par har
+                // column ka alag audit row mat banao (dekho SuppressAudit).
+                if (SuppressAudit)
+                {
+                    if (entry.State != EntityState.Unchanged && entry.State != EntityState.Detached)
+                        SetAuditFields(entry, userName);
+                    continue;
+                }
                 if (entry.State == EntityState.Unchanged || entry.State == EntityState.Detached) continue;
 
                 // ── Yahan CreatedBy/UpdatedBy set ho jaata hai ──────────

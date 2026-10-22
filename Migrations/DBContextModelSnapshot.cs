@@ -67,7 +67,372 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ReportLogs", (string)null);
+                    b.ToTable("ReportLogs");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.CableConnection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CableType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("FromDeviceDetailId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("FromEndpoint")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("FromFace")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid?>("FromPlacementId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<string>("LayerKey")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<decimal?>("LengthM")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<Guid?>("NetworkConnectionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<Guid?>("ToDeviceDetailId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ToEndpoint")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("ToFace")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid?>("ToPlacementId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("TrayPathJson")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("WaypointsJson")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromPlacementId");
+
+                    b.HasIndex("ToPlacementId");
+
+                    b.HasIndex("FloorId", "IsActive");
+
+                    b.ToTable("CableConnections");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.CableTray", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Axis")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("varchar(2)");
+
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("ElevationY")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal>("FromCoord")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<decimal>("Line")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<int>("NearSide")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PitchM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid?>("RoomId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Slots")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ToCoord")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("TrayCode")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("TrayType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("WidthM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloorId", "TrayCode")
+                        .IsUnique();
+
+                    b.ToTable("CableTrays");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.DataCenter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("BreadthM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("BreadthUnit")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid?>("CityId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<Guid?>("ContactPersonId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("CoolingCapacityKW")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DoorDirection")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("DoorPosition")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid?>("DxfFileId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("HeightM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal?>("Latitude")
+                        .HasPrecision(10, 7)
+                        .HasColumnType("decimal(10,7)");
+
+                    b.Property<decimal?>("LengthM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("LengthUnit")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("LocationName")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<decimal?>("Longitude")
+                        .HasPrecision(10, 7)
+                        .HasColumnType("decimal(10,7)");
+
+                    b.Property<decimal?>("MarginBottom")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<decimal?>("MarginLeft")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<decimal?>("MarginRight")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<decimal?>("MarginTop")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("MarginUnit")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("PinCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<decimal?>("PowerCapacityKW")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("SetupMode")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<Guid?>("SiteId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("StateId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("TotalKW")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("TotalKWUnit")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<int?>("TotalRacks")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("UtilizedRacks")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("DataCenters");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceCategory", b =>
@@ -109,7 +474,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeviceCategories", (string)null);
+                    b.ToTable("DeviceCategories");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceConnectionConfig", b =>
@@ -167,7 +532,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("DeviceDetailId");
 
-                    b.ToTable("DeviceConnectionConfigs", (string)null);
+                    b.ToTable("DeviceConnectionConfigs");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceDetail", b =>
@@ -283,7 +648,128 @@ namespace DeviceManagementOnly.Migrations
                         .IsUnique()
                         .HasFilter("SerialNumber IS NOT NULL");
 
-                    b.ToTable("DeviceDetails", (string)null);
+                    b.ToTable("DeviceDetails");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceFloorPlacement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("AisleName")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("DeviceDetailId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("DeviceTypeId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("HeightMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("IconName")
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsPinned")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsProvisional")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsVisible")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LabelText")
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<decimal?>("LengthMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("MetaJson")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PlaceholderName")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<decimal>("PositionX")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<decimal>("PositionY")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<decimal>("PositionZ")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid?>("RoomId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal>("RotationAngle")
+                        .HasPrecision(9, 3)
+                        .HasColumnType("decimal(9,3)");
+
+                    b.Property<string>("RowName")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("Shape")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("WidthMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceDetailId")
+                        .IsUnique();
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("FloorId", "IsActive");
+
+                    b.ToTable("DeviceFloorPlacements");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceLocation", b =>
@@ -356,7 +842,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeviceLocations", (string)null);
+                    b.ToTable("DeviceLocations");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceMaster", b =>
@@ -418,7 +904,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("ModelSpecificationId");
 
-                    b.ToTable("DeviceMasters", (string)null);
+                    b.ToTable("DeviceMasters");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceModelMapping", b =>
@@ -451,7 +937,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("ModelSpecificationId");
 
-                    b.ToTable("DeviceModelMappings", (string)null);
+                    b.ToTable("DeviceModelMappings");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceRackLocation", b =>
@@ -468,6 +954,10 @@ namespace DeviceManagementOnly.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<string>("Country")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
@@ -479,6 +969,13 @@ namespace DeviceManagementOnly.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<Guid>("DeviceDetailId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Face")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<Guid?>("FaceImageFileId")
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("IsActive")
@@ -493,6 +990,9 @@ namespace DeviceManagementOnly.Migrations
                     b.Property<string>("PinCode")
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
+
+                    b.Property<string>("PortsJson")
+                        .HasColumnType("longtext");
 
                     b.Property<Guid?>("RackId")
                         .HasColumnType("char(36)");
@@ -519,7 +1019,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("RackId");
 
-                    b.ToTable("DeviceRackLocations", (string)null);
+                    b.ToTable("DeviceRackLocations");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceType", b =>
@@ -528,11 +1028,27 @@ namespace DeviceManagementOnly.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<decimal?>("CoolingKW")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
+
+                    b.Property<decimal?>("DefaultHeightMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<decimal?>("DefaultLengthMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<decimal?>("DefaultWidthMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
@@ -543,6 +1059,10 @@ namespace DeviceManagementOnly.Migrations
                     b.Property<Guid>("DeviceCategoryId")
                         .HasColumnType("char(36)");
 
+                    b.Property<decimal?>("HeatKW")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
                     b.Property<string>("Icon")
                         .HasColumnType("longtext");
 
@@ -551,6 +1071,10 @@ namespace DeviceManagementOnly.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LayerKey")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -561,6 +1085,10 @@ namespace DeviceManagementOnly.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Shape")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("SupportedFeature")
                         .HasColumnType("longtext");
@@ -575,7 +1103,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("DeviceCategoryId");
 
-                    b.ToTable("DeviceTypes", (string)null);
+                    b.ToTable("DeviceTypes");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.Floor", b =>
@@ -590,21 +1118,106 @@ namespace DeviceManagementOnly.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
+                    b.Property<Guid?>("DataCenterId")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("FloorPlanFileUrl")
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
+                    b.Property<decimal?>("HeightM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal?>("LengthM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<int?>("LevelNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<decimal?>("RaisedFloorHeightM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
                     b.Property<string>("SiteName")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
+
+                    b.Property<decimal?>("TileSizeM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("WidthM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DataCenterId");
+
+                    b.ToTable("Floors");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.FloorTile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("AirflowCfm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("AisleType")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal>("PositionX")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<decimal>("PositionZ")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid?>("RoomId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal>("SizeM")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("TileType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -614,7 +1227,147 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Floors", (string)null);
+                    b.HasIndex("FloorId", "IsActive");
+
+                    b.ToTable("FloorTiles");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.LayoutLock", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("DataCenterId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("EditingBy")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<DateTime?>("EditingExpiresAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EditingSessionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("EditingSince")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastSavedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastSavedBy")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("LockNote")
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<DateTime?>("LockedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LockedBy")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("Revision")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UnlockedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UnlockedBy")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloorId")
+                        .IsUnique();
+
+                    b.ToTable("LayoutLocks");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.LayoutView", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CameraJson")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("DataCenterId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("FilterStateJson")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsShared")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LayerStateJson")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ThumbnailFileId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloorId");
+
+                    b.ToTable("LayoutViews");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.ModelCategory", b =>
@@ -656,7 +1409,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ModelCategories", (string)null);
+                    b.ToTable("ModelCategories");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.ModelParameter", b =>
@@ -745,7 +1498,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("ModelCategoryId");
 
-                    b.ToTable("ModelParameters", (string)null);
+                    b.ToTable("ModelParameters");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.ModelProtocolPoint", b =>
@@ -975,7 +1728,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("DeviceTypeId");
 
-                    b.ToTable("ModelSpecifications", (string)null);
+                    b.ToTable("ModelSpecifications");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.NetworkConnection", b =>
@@ -1033,7 +1786,97 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("TargetDeviceDetailId");
 
-                    b.ToTable("NetworkConnections", (string)null);
+                    b.ToTable("NetworkConnections");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.PipeConnection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("DiameterMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<decimal>("ElevationY")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid>("FloorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("FromDeviceDetailId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("FromOffset")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid?>("FromPlacementId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<decimal?>("LengthM")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("PipeType")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("RouteJson")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<Guid?>("ToDeviceDetailId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("ToOffset")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid?>("ToPlacementId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("WaypointsJson")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloorId", "IsActive");
+
+                    b.ToTable("PipeConnections");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.Rack", b =>
@@ -1042,14 +1885,38 @@ namespace DeviceManagementOnly.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("AisleName")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
+                    b.Property<decimal?>("DepthMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("FacingDirection")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<decimal?>("HeightMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LabelText")
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
 
                     b.Property<decimal?>("MaxWeightCapacityKg")
                         .HasColumnType("decimal(65,30)");
@@ -1068,6 +1935,18 @@ namespace DeviceManagementOnly.Migrations
                     b.Property<Guid>("RoomId")
                         .HasColumnType("char(36)");
 
+                    b.Property<decimal?>("RotationAngle")
+                        .HasPrecision(9, 3)
+                        .HasColumnType("decimal(9,3)");
+
+                    b.Property<string>("RowName")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("Shape")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -1082,11 +1961,15 @@ namespace DeviceManagementOnly.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("longtext");
 
+                    b.Property<decimal?>("WidthMm")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("Racks", (string)null);
+                    b.ToTable("Racks");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.RackPowerCapacity", b =>
@@ -1140,7 +2023,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("RackId");
 
-                    b.ToTable("RackPowerCapacities", (string)null);
+                    b.ToTable("RackPowerCapacities");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.Room", b =>
@@ -1149,14 +2032,33 @@ namespace DeviceManagementOnly.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("ColorHex")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DimensionUnit")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
                     b.Property<Guid>("FloorId")
                         .HasColumnType("char(36)");
+
+                    b.Property<decimal?>("Height")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("Icon")
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<string>("InnerMarginsJson")
+                        .HasColumnType("longtext");
 
                     b.Property<decimal?>("InternalUseAreaSqFt")
                         .HasColumnType("decimal(65,30)");
@@ -1166,6 +2068,9 @@ namespace DeviceManagementOnly.Migrations
 
                     b.Property<decimal?>("Length")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<string>("MarginsJson")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1178,14 +2083,25 @@ namespace DeviceManagementOnly.Migrations
                     b.Property<decimal?>("PositionY")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<decimal?>("PowerBudgetKW")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
                     b.Property<decimal?>("ReservedAreaSqFt")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal?>("RoomAreaSqFt")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<string>("RoomType")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
                     b.Property<decimal?>("RotationAngle")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -1200,7 +2116,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("FloorId");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.DocumentIssuedBy", b =>
@@ -1228,7 +2144,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentIssuedBies", (string)null);
+                    b.ToTable("DocumentIssuedBies");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.DocumentType", b =>
@@ -1265,7 +2181,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentTypes", (string)null);
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.EntityType", b =>
@@ -1303,7 +2219,7 @@ namespace DeviceManagementOnly.Migrations
                     b.HasIndex("EntityName")
                         .IsUnique();
 
-                    b.ToTable("EntityTypes", (string)null);
+                    b.ToTable("EntityTypes");
 
                     b.HasData(
                         new
@@ -1438,7 +2354,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasIndex("EntityTypeId", "EntityId", "FileCategory");
 
-                    b.ToTable("FileStores", (string)null);
+                    b.ToTable("FileStores");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.other.AuditLog", b =>
@@ -1485,7 +2401,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuditLogs", (string)null);
+                    b.ToTable("AuditLogs");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.other.ImportFieldMapping", b =>
@@ -1526,7 +2442,7 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ImportFieldMappings", (string)null);
+                    b.ToTable("ImportFieldMappings");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.other.UnitMaster", b =>
@@ -1553,7 +2469,29 @@ namespace DeviceManagementOnly.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitMasters", (string)null);
+                    b.ToTable("UnitMasters");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.CableConnection", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.CableTray", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceConnectionConfig", b =>
@@ -1581,6 +2519,31 @@ namespace DeviceManagementOnly.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ParentDevice");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceFloorPlacement", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.DeviceDetail", "DeviceDetail")
+                        .WithMany()
+                        .HasForeignKey("DeviceDetailId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DeviceManagementOnly.Models.Device.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("DeviceDetail");
+
+                    b.Navigation("Floor");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.DeviceMaster", b =>
@@ -1641,6 +2604,47 @@ namespace DeviceManagementOnly.Migrations
                         .HasForeignKey("DeviceCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.Floor", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.DataCenter", null)
+                        .WithMany()
+                        .HasForeignKey("DataCenterId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.FloorTile", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.LayoutLock", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.LayoutView", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.ModelParameter", b =>
@@ -1705,6 +2709,17 @@ namespace DeviceManagementOnly.Migrations
                     b.Navigation("SourceDeviceDetail");
 
                     b.Navigation("TargetDeviceDetail");
+                });
+
+            modelBuilder.Entity("DeviceManagementOnly.Models.Device.PipeConnection", b =>
+                {
+                    b.HasOne("DeviceManagementOnly.Models.Device.Floor", "Floor")
+                        .WithMany()
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
                 });
 
             modelBuilder.Entity("DeviceManagementOnly.Models.Device.Rack", b =>

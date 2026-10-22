@@ -46,6 +46,24 @@ namespace DeviceManagementOnly.Models.Device
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
 
+        // ---- 5D View / Rack elevation ke liye naye field ----
+
+        /// <summary>front | rear - rack ke kis mooh par laga hai.</summary>
+        [MaxLength(10)] public string? Face { get; set; } = "front";
+
+        /// <summary>
+        /// Is slot ke ports ka naksha, JSON array.
+        /// 5D me har slot par 12 port hote hain aur cable ka endpoint
+        /// "rackDeviceId#slotId@portIdx" hota hai - wahi yahan rakha jaata hai.
+        /// </summary>
+        public string? PortsJson { get; set; }
+
+        /// <summary>Rack face par is device ki tasveer (FileStore).</summary>
+        public Guid? FaceImageFileId { get; set; }
+
+        /// <summary>Slot ka rang - rack elevation me.</summary>
+        [MaxLength(20)] public string? ColorHex { get; set; }
+
         public bool IsActive { get; set; } = true;
 
         public string? CreatedBy { get; set; }
